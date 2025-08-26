@@ -9,6 +9,7 @@ class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
+    email = Column(String)
     preferences = Column(String)
     created_at = Column(DateTime, default=datetime.now)
     quests = relationship("Quest", back_populates="creator")
