@@ -5,8 +5,16 @@ name = "pypi"
 
 [packages]
 ipdb = "*"
+grok = "*"
+sqlalchemy = "*"
+click = "*"
+geocoder = "*"
+art = "*"
+alembic = "*"
+pytest = "*"
 
 [dev-packages]
+pytest = "*"
 
 [requires]
 python_version = "3.8"
