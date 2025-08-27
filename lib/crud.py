@@ -14,7 +14,7 @@ def create_user(name, email=None, preferences=None):
     
 def delete_user(user_id):
     with Session() as session:
-        user = session.quesry(User).get(user_id)
+        user = session.query(User).get(user_id)
         if not user:
             raise ValueError(f"Did not delete. Reason: User {user_id} not found")
         session.delete(user)
@@ -31,3 +31,28 @@ def find_user_by_id(user_id):
             raise ValueError(f"User {user_id} not found")
         return user
     
+def create_quest(name, creator_id, location, quest_type):
+    with Session() as session:
+        quest = Quest(name=name, creator_id=creator_id, location=location, type=quest_type)
+        session.add(quest)
+        session.commit()
+        return quest.id
+
+def delete_quest(quest_id):
+    with Session() as session:
+        quest = session.query(Quest).get(quest_id)
+        if not quest:
+            raise ValueError(f"Quest {quest_id} not found")
+        session.delete(quest)
+        session.commit()
+
+def get_all_quests():
+    with Session() as session:
+        return session.query(Quest).all()
+
+def find_quest_by_id(quest_id):
+    with Session() as session:
+        quest = session.query(Quest).get(quest_id)
+        if not quest:
+            raise ValueError(f"Quest {quest_id} not found")
+        return quest
