@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from lib.db.models import Base, User, Quest
 
-engine = create_engine("sqlite:///quest.db")
+engine = create_engine("sqlite:///quests.db")
 Session = sessionmaker(bind=engine)
 
 def create_user(name, email=None, preferences=None):

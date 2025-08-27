@@ -8,16 +8,16 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
+    _name = Column(String, nullable=False)
     email = Column(String)
     preferences = Column(String)
-    created_at = Column(DateTime, default=datetime.now)
+    created_at = Column(DateTime, default=datetime.utcnow)
     quests = relationship("Quest", back_populates="creator")
 
     @property
     def name(self):
         return self._name
-    
+
     @name.setter
     def name(self, value):
         if not value or len(value.strip()) < 2:
@@ -35,8 +35,8 @@ class Quest(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     creator_id = Column(Integer, ForeignKey("users.id"))
-    location = Column(String, nullable=False)
-    type = Column(String, nullable=False)
+    _location = Column(String, nullable=False)
+    _type = Column(String, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
     creator = relationship("User", back_populates="quests")
 
@@ -45,13 +45,13 @@ class Quest(Base):
     @property
     def type(self):
         return self._type
-    
+
     @type.setter
     def type(self, value):
         if value not in self.QUEST_TYPES:
             raise ValueError(f"Type must be one of {self.QUEST_TYPES}")
         self._type = value
-        
+   
     @property
     def location(self):
         return self._location
