@@ -59,3 +59,10 @@ def find_quest_by_id(quest_id, load_creator=False):
         if not quest:
             raise ValueError("Quest not found")
         return quest
+
+def get_quests_by_user_id(user_id):
+    with Session() as session:
+        user = session.query(User).filter_by(id=user_id).first()
+        if not user:
+            raise ValueError("User not found")
+        return session.query(Quest).filter_by(creator_id=user_id).all()

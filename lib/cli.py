@@ -19,8 +19,9 @@ def user_menu():
         click.echo("2. Delete User")
         click.echo("3. List Users")
         click.echo("4. Find User by ID")
-        click.echo("5. Back")
-        choice = click.prompt("Choose option (1-5)", type=int)
+        click.echo("5. View User's Quests")
+        click.echo("6. Back")
+        choice = click.prompt("Choose option (1-6)", type=int)
         try:
             if choice == 1:
                 name = click.prompt("Name")
@@ -41,6 +42,14 @@ def user_menu():
                 user = find_user_by_id(user_id)
                 click.echo(format_object(user))
             elif choice == 5:
+                user_id = click.prompt("User ID", type=int)
+                quests = get_quests_by_user_id(user_id)
+                if not quests:
+                    click.echo("No quests found for this user")
+                else:
+                    for quest in quests:
+                        click.echo(format_object(quest))
+            elif choice == 6:
                 break
             else:
                 click.echo("Invalid choice")
