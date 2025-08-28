@@ -1,3 +1,4 @@
+#This file will be used in a later version that has AI generated adventures and clues
 import logging
 
 logger = logging.getLogger(__name__)

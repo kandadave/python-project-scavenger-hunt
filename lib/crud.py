@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, joinedload
 from lib.db.models import Base, User, Quest
 
 engine = create_engine("sqlite:///quests.db")
@@ -50,9 +50,12 @@ def find_user_by_id(user_id):
             raise ValueError("User not found")
         return user
 
-def find_quest_by_id(quest_id):
+def find_quest_by_id(quest_id, load_creator=False):
     with Session() as session:
-        quest = session.query(Quest).filter_by(id=quest_id).first()
+        query = session.query(Quest)
+        if load_creator:
+            query = query.options(joinedload(Quest.creator))
+        quest = query.filter_by(id=quest_id).first()
         if not quest:
             raise ValueError("Quest not found")
         return quest

@@ -81,7 +81,7 @@ def quest_menu():
                 click.echo(format_object(quest))
             elif choice == 5:
                 quest_id = click.prompt("Quest ID", type=int)
-                quest = find_quest_by_id(quest_id)
+                quest = find_quest_by_id(quest_id, load_creator=True)
                 creator = quest.creator
                 click.echo(format_object(creator))
             elif choice == 6:
