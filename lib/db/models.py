@@ -17,7 +17,7 @@ class User(Base):
     @property
     def name(self):
         return self._name
-
+ 
     @name.setter
     def name(self, value):
         if not value or len(value.strip()) < 2:
@@ -37,6 +37,7 @@ class Quest(Base):
     creator_id = Column(Integer, ForeignKey("users.id"))
     _location = Column(String, nullable=False)
     _type = Column(String, nullable=False)
+    clue = Column(String, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
     creator = relationship("User", back_populates="quests")
 
@@ -45,21 +46,19 @@ class Quest(Base):
     @property
     def type(self):
         return self._type
-
+ 
     @type.setter
     def type(self, value):
         if value not in self.QUEST_TYPES:
             raise ValueError(f"Type must be one of {self.QUEST_TYPES}")
         self._type = value
-   
+     
     @property
     def location(self):
         return self._location
 
     @location.setter
     def location(self, value):
-        from lib.utils import validate_location
-        valid, _ = validate_location(value)
-        if not valid:
-            raise ValueError(f"Invalid location: {value}")
+        if not value or not value.strip():
+            raise ValueError("Location cannot be empty")
         self._location = value
