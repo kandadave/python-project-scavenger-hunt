@@ -34,8 +34,8 @@ This is a robust, interactive CLI application designed to allow users to create,
 **1. Clone the repository:**
 
 ```bash
-git clone [https://github.com/kandadave/urban-quest-creator](https://github.com/kandadave/urban-quest-creator)
-cd urban-quest-creator
+git clone [https://github.com/kandadave/python-project-scavenger-hunt](https://github.com/kandadave/python-project-scavenger-hunt)
+cd python-project-scavenger-hunt
 ````
 
 **2. Install Dependencies:**
@@ -96,7 +96,6 @@ Interact with the main menu to:
   - **Alembic**: Tool for handling database migrations.
   - **Art**: Library for generating ASCII art maps.
   - **SQLite**: Lightweight database for storing user and quest data.
-  - **Pytest**: Framework for running unit tests.
 
 ## Support and Contact Details
 
